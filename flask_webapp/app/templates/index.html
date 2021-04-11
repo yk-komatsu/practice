@@ -2,10 +2,21 @@
 <html>
 
 <head>
+    <title>{{name}}</title>
 </head>
 
 <body>
-    <h1>Webアプリ初心者のFlaskチュートリアル</h1>
+    {% if name == "sumomo" %}
+    <h1>スペシャル{{name}}猫</h1>
+    {% elif name %}
+    <h1>{{name}}猫</h1>
+    {% else %}
+    <h1>ただの猫</h1>
+    {% endif %}
+    <img src="/static/images/cat.jpg" alt="猫">
+    {% for word in texts %}
+    <p>{{word}}</p>
+    {% endfor %}
 </body>
 
 </html>

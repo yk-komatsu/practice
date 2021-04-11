@@ -1,16 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 
 @app.route("/")
-def hello():
-    return "Hello, world"
-
-
 @app.route("/index")
 def index():
-    return render_template("index.html")
+    name = request.args.get("name")
+    texts = ["猫", "犬", "うさぎ", "亀", "馬"]
+    return render_template("index.html", name=name, texts=texts)
 
 
 if __name__ == "__main__":
