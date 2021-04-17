@@ -11,5 +11,12 @@ def index():
     return render_template("index.html", name=name, texts=texts)
 
 
+@app.route("/index", methods=["post"])
+def post():
+    name = request.form["name"]
+    texts = ["猫", "犬", "うさぎ", "亀", "馬"]
+    return render_template("index.html", name=name, texts=texts)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
