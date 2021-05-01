@@ -5,6 +5,8 @@
     <title>{{name}}</title>
 </head>
 
+<a href="/logout">ログアウトする</a>
+
 <body>
     {% if name == "sumomo" %}
     <h1>スペシャル{{name}}猫</h1>
@@ -13,10 +15,6 @@
     {% else %}
     <h1>ただの猫</h1>
     {% endif %}
-    <form action="/index" method="POST">
-        <input type="text" name="name" placeholder="Enter name">
-        <input type="submit" value="Submit">
-    </form>
     <img src="/static/images/cat.jpg" alt="猫">
     <form action="/add" method="POST">
         <input type="text" name="title" placeholder="title">
