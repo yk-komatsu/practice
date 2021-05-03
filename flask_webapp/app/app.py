@@ -74,6 +74,12 @@ def login():
         return redirect(url_for("top", status="user_notfound"))
 
 
+@app.route("/logout")
+def logout():
+    session.pop("user_name", None)
+    return redirect(url_for("top", status="logout"))
+
+
 @app.route("/register", methods=["post"])
 def register():
     user_name = request.form["user_name"]
