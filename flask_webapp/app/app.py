@@ -6,14 +6,18 @@ from hashlib import sha256
 from app import key
 
 app = Flask(__name__)
+app.secret_key = key.SECRET_KEY
 
 
 @app.route("/")
 @app.route("/index")
 def index():
-    name = request.args.get("name")
-    all_onegai = OnegaiContent.query.all()
-    return render_template("index.html", name=name, all_onegai=all_onegai)
+    if "user_name" in session:
+        name = session["user_name"]
+        all_onegai = OnegaiContent.query.all()
+        return render_template("index.html", name=name, all_onegai=all_onegai)
+    else:
+        return redirect(url_for("top", status="logout"))
 
 
 @app.route("/index", methods=["post"])
