@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from models.models import OnegaiContent, User
-from models.database import session
+from models.database import db_session
 from datetime import datetime
 from hashlib import sha256
 from app import key
@@ -28,8 +28,8 @@ def add():
     title = request.form["title"]
     body = request.form["body"]
     content = OnegaiContent(title, body, datetime.now())
-    session.add(content)
-    session.commit()
+    db_session.add(content)
+    db_session.commit()
     return index()
 
 
@@ -38,7 +38,7 @@ def update():
     content = OnegaiContent.query.filter_by(id=request.form["update"]).first()
     content.title = request.form["title"]
     content.body = request.form["body"]
-    session.commit()
+    db_session.commit()
     return index()
 
 
@@ -47,8 +47,8 @@ def delete():
     id_list = request.form.getlist("delete")
     for id in id_list:
         content = OnegaiContent.query.filter_by(id=id).first()
-        session.delete(content)
-    session.commit()
+        db_session.delete(content)
+    db_session.commit()
     return index()
 
 

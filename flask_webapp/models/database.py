@@ -18,10 +18,12 @@ DATABASE = "mysql://%s:%s@%s/%s?charset=utf8mb4" % (
     db_name,
 )
 ENGINE = create_engine(DATABASE, convert_unicode=True, echo=True)
-session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=ENGINE))
+db_session = scoped_session(
+    sessionmaker(autocommit=False, autoflush=False, bind=ENGINE)
+)
 
 Base = declarative_base()
-Base.query = session.query_property()
+Base.query = db_session.query_property()
 
 
 def init_db():
