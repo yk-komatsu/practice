@@ -56,6 +56,12 @@ def delete():
     return index()
 
 
+@app.route("/top")
+def top():
+    status = request.args.get("status")
+    return render_template("top.html", status=status)
+
+
 @app.route("/login", methods=["post"])
 def login():
     user_name = request.form["user_name"]
@@ -78,6 +84,12 @@ def login():
 def logout():
     session.pop("user_name", None)
     return redirect(url_for("top", status="logout"))
+
+
+@app.route("/newcomer")
+def newcomer():
+    status = request.args.get("status")
+    return render_template("newcomer.html", status=status)
 
 
 @app.route("/register", methods=["post"])
