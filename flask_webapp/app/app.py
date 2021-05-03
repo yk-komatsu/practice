@@ -70,5 +70,23 @@ def login():
         return redirect(url_for("top", status="user_notfound"))
 
 
+@app.route("/register", methods=["post"])
+def register():
+    user_name = request.form["user_name"]
+    user = User.query.filter_by(user_name=user_name).first()
+    if user:
+        return redirect(url_for("newcomer", status="exist_user"))
+    else:
+        password = request.form["password"]
+        hashed_password = sha256(
+            (user_name + password + key.SALT).encode("utf-8")
+        ).hexdigest()
+        user = User(user_name, hashed_password)
+        db_session.add(user)
+        db_session.commit()
+        session["user_name"] = user_name
+        return redirect(url_for("index"))
+
+
 if __name__ == "__main__":
     app.run(debug=True)
