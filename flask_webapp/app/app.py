@@ -27,7 +27,7 @@ def add():
     content = OnegaiContent(title, body, datetime.now())
     db_session.add(content)
     db_session.commit()
-    return index()
+    return redirect(url_for("index"))
 
 
 @app.route("/update", methods=["post"])
@@ -36,7 +36,7 @@ def update():
     content.title = request.form["title"]
     content.body = request.form["body"]
     db_session.commit()
-    return index()
+    return redirect(url_for("index"))
 
 
 @app.route("/delete", methods=["post"])
@@ -46,7 +46,7 @@ def delete():
         content = OnegaiContent.query.filter_by(id=id).first()
         db_session.delete(content)
     db_session.commit()
-    return index()
+    return redirect(url_for("index"))
 
 
 @app.route("/top")
