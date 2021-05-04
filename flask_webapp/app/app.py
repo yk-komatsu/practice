@@ -20,13 +20,6 @@ def index():
         return redirect(url_for("top", status="logout"))
 
 
-@app.route("/index", methods=["post"])
-def post():
-    name = request.form["name"]
-    all_onegai = OnegaiContent.query.all()
-    return render_template("index.html", name=name, all_onegai=all_onegai)
-
-
 @app.route("/add", methods=["post"])
 def add():
     title = request.form["title"]
